@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\OrderStatusUpdated;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+
+    // Events can be broadcasted like in this case or queued
+    OrderStatusUpdated::dispatch(User::all()->random());
+
     return view('welcome');
 });
 
