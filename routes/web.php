@@ -15,12 +15,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+class Order
+{
+    public $id;
+
+    public function __construct($id)
+    {
+        $this->id = $id;
+    }
+}
+
 Route::get('/', function () {
 
     // Events can be broadcasted like in this case or queued
-    OrderStatusUpdated::dispatch(User::all()->random());
 
     return view('welcome');
+});
+
+Route::get('/update', function(){
+    OrderStatusUpdated::dispatch(new Order(1));
 });
 
 Route::get('/dashboard', function () {
